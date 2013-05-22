@@ -10,14 +10,6 @@ public class MainActivity extends Activity {
     private static String TAG = "Daggerize";
 
     TextView statusText;
-    RegistrationManager mgr;
-
-    public MainActivity() {
-    }
-
-    public MainActivity(RegistrationManager mgr) {
-        this.mgr = mgr;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,15 +19,8 @@ public class MainActivity extends Activity {
     }
 
     public void registerUser(String name) {
-        String status = getRegistrationManager().registerUser(name);
+        String status = RegistrationManager.getInstance().registerUser(name);
         statusText.setText(status);
-    }
-
-    public RegistrationManager getRegistrationManager() {
-        if (mgr == null) {
-            mgr = RegistrationManager.getInstance();
-        }
-        return mgr;
     }
 
 }
