@@ -30,4 +30,9 @@ import org.robolectric.RobolectricTestRunner;
     	activity.registerUser("Alexa");
     	assertThat(statusText).containsText("Just registered Alexa");
     }
+
+    @Test public void shouldNotUseProductionRegistrationSystem_OMFG() {
+    	activity.registerUser("LookingForNewJob");
+    	assertThat(statusText).doesNotContainText("production.registration.system");    	
+    }
 }
