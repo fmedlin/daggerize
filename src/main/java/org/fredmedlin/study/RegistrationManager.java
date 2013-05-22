@@ -19,7 +19,7 @@ public class RegistrationManager {
 		return "Just registered " + name + " on " + getRegistrationUrl();
 	}
 
-	private	 String getRegistrationUrl() {
+	public String getRegistrationUrl() {
 		return "http://org.production.registration.system.com";
 	}
 }

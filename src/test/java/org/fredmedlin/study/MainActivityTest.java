@@ -1,6 +1,7 @@
 package org.fredmedlin.study;
 
-import static org.fest.assertions.api.ANDROID.assertThat;
+import static org.fest.assertions.api.ANDROID.*;
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertNotNull;
 
 import android.widget.TextView;
@@ -8,15 +9,19 @@ import android.widget.TextView;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class) public class MainActivityTest {
 
     MainActivity activity;
     TextView statusText;
+    @Mock RegistrationManager registrationManager;
 
     @Before public void setUp() throws Exception {
-        activity = new MainActivity();
+    	MockitoAnnotations.initMocks(this);
+        activity = new MainActivity(registrationManager);
         activity.onCreate(null);
         statusText = (TextView) activity.findViewById(R.id.text_status);
     }
@@ -28,11 +33,11 @@ import org.robolectric.RobolectricTestRunner;
 
     @Test public void shouldRegisterUser() {
     	activity.registerUser("Alexa");
-    	assertThat(statusText).containsText("Just registered Alexa");
+    	verify(registrationManager).registerUser("Alexa");
     }
 
     @Test public void shouldNotUseProductionRegistrationSystem_OMFG() {
     	activity.registerUser("LookingForNewJob");
-    	assertThat(statusText).doesNotContainText("production.registration.system");    	
+    	verify(registrationManager).registerUser("LookingForNewJob");
     }
 }
