@@ -1,18 +1,17 @@
 package org.fredmedlin.study;
 
+import javax.inject.Inject;
+
 public class RegistrationManager {
 
-	public static RegistrationManager instance;
-
-	public static RegistrationManager getInstance() {
-		if (instance == null) {
-			instance = new RegistrationManager();
-		}
-		return instance;
+	String url;
+	
+	public RegistrationManager() {
+		this.url = "http://org.production.registration.system.com";
 	}
 
-	private RegistrationManager() {
-		// Not for public consumption
+	public RegistrationManager(String url) {
+		this.url = url;
 	}
 
 	public String registerUser(String name) {
@@ -20,6 +19,6 @@ public class RegistrationManager {
 	}
 
 	public String getRegistrationUrl() {
-		return "http://org.production.registration.system.com";
+		return url;
 	}
 }
